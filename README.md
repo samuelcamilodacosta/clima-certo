@@ -64,3 +64,7 @@ src/
 - Orçamento com itens dinâmicos, desconto e assinaturas (prestador + cliente)
 - Termo de dispensa de licitação
 - PDF sempre em **uma única página A4**
+
+## Projeto
+
+- Este é apenas um projeto auxiliar de uso prático para auxiliar a criação de orçamentos para a Clima Certo

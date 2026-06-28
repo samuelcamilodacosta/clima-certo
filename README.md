@@ -26,24 +26,24 @@ npm run preview
 
 A pasta `dist/` conterá os arquivos prontos para publicação.
 
-## Publicar no GitHub Pages
+## Publicar no GitHub Pages (GitHub Actions)
 
-1. Crie um repositório no GitHub (ex.: `ClimaCerto`)
-2. Envie o código:
+Site: **https://samuelcamilodacosta.github.io/clima-certo/**
 
-```bash
-git init
-git add .
-git commit -m "feat: gerador de documentos Clima Certo"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/ClimaCerto.git
-git push -u origin main
-```
+### Configuração (uma vez)
 
-3. No GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**
-4. O workflow `.github/workflows/deploy.yml` publica automaticamente a cada push na branch `main`
+1. **Settings → Pages → Build and deployment**
+2. **Source:** **GitHub Actions** (não “Deploy from a branch”)
+3. **Settings → Environments → clima-certo** → secret `VITE_APP_PASSWORD`
 
-> Se o repositório tiver outro nome, altere o `base` em `vite.config.ts` para `'/NomeDoRepo/'`.
+### Deploy automático
+
+A cada push na `main`, o workflow `.github/workflows/deploy.yml`:
+
+1. **build** — instala dependências, roda `npm run build` (environment `clima-certo`)
+2. **deploy** — publica o `dist/` no GitHub Pages (environment `github-pages`)
+
+Para publicar manualmente: **Actions → Deploy GitHub Pages → Run workflow**
 
 ## Estrutura
 

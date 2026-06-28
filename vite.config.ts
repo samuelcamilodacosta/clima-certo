@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 
-// Altere o base para o nome do seu repositório no GitHub Pages
-// Ex.: repositório "ClimaCerto" → base: '/ClimaCerto/'
+const repoBase = '/clima-certo/';
+
 export default defineConfig({
-  base: process.env.VITE_BASE_PATH ?? '/',
+  base:
+    process.env.VITE_BASE_PATH ??
+    (process.env.GITHUB_ACTIONS === 'true' ? repoBase : '/'),
 });

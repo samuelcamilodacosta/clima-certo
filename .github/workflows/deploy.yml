@@ -6,14 +6,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     environment: clima-certo
     steps:
@@ -31,9 +33,25 @@ jobs:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_APP_PASSWORD: ${{ secrets.VITE_APP_PASSWORD }}
 
-      - name: Publicar em gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Verificar build de produção
+        run: |
+          test -f dist/index.html
+          grep -q 'assets/' dist/index.html
+          if grep -q 'src/main.ts' dist/index.html; then
+            echo "Erro: dist contém referência ao código-fonte (build inválido)."
+            exit 1
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

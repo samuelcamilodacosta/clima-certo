@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Clima Certo — Gerador de Orçamentos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/clima-certo/assets/logo-D9xeXZ-S.png">
+  <script type="module" crossorigin src="/clima-certo/assets/index-Di4S5dvn.js"></script>
+  <link rel="stylesheet" crossorigin href="/clima-certo/assets/index-BcmB3gm2.css">
+</head>
+<body>
+  <div id="auth-gate" class="auth-gate">
+    <div class="auth-gate-card">
+      <img id="auth-logo" src="" alt="Clima Certo" class="auth-gate-logo">
+      <h1 class="auth-gate-title">Clima Certo</h1>
+      <p class="auth-gate-subtitle">Gerador de Orçamentos</p>
+      <form id="auth-form" class="auth-gate-form">
+        <div class="field">
+          <label for="auth-password">Senha de acesso</label>
+          <input type="password" id="auth-password" autocomplete="current-password" placeholder="Digite a senha" required>
+        </div>
+        <p id="auth-error" class="auth-gate-error hidden" role="alert"></p>
+        <button type="submit" class="btn btn-primary auth-gate-submit" id="auth-submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-root" class="hidden">
+  <header class="site-header">    <img id="header-logo" src="" alt="Clima Certo" class="header-logo">
+    <div>
+      <h1>Clima Certo</h1>
+      <p>Gerador de Orçamentos</p>
+    </div>
+  </header>
+
+  <div class="empresa-bar">
+    <div class="empresa-info">
+      <strong>CLIMA CERTO AR CONDICIONADO</strong>
+      <span>CNPJ: 66.217.313/0001-04</span>
+      <span>PIX: 66.217.313/0001-04</span>
+    </div>
+    <div class="field funcionario-field">
+      <label for="funcionario">Funcionário responsável</label>
+      <input type="text" id="funcionario" placeholder="Nome do funcionário que gera o documento">
+    </div>
+  </div>
+
+  <main class="container">
+    <section id="panel-orcamento">
+      <div class="form-side">
+          <h2>Novo Orçamento</h2>
+          <form id="form-orcamento">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="orc-numero">Nº do Orçamento</label>
+                <input type="text" id="orc-numero" placeholder="Ex: 001-2025">
+              </div>
+              <div class="field">
+                <label for="orc-data">Data de criação</label>
+                <input type="date" id="orc-data">
+              </div>
+              <div class="field">
+                <label for="orc-validade">Válido até</label>
+                <input type="date" id="orc-validade">
+              </div>
+              <div class="field full">
+                <label for="orc-titulo">Título / Objeto da proposta</label>
+                <input type="text" id="orc-titulo" placeholder="Ex: Higienização de ar condicionado e manutenção corretiva">
+              </div>
+            </div>
+
+            <h3>Dados do Cliente</h3>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="orc-cliente">Nome / Razão Social</label>
+                <input type="text" id="orc-cliente" placeholder="Nome do cliente">
+              </div>
+              <div class="field">
+                <label for="orc-cliente-doc">CPF / CNPJ</label>
+                <input type="text" id="orc-cliente-doc" placeholder="000.000.000-00 ou 00.000.000/0000-00" maxlength="18" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="orc-cliente-contato">Telefone</label>
+                <input type="text" id="orc-cliente-contato" placeholder="(62) 99999-9999" maxlength="15" inputmode="tel">
+              </div>
+              <div class="field full">
+                <label for="orc-cliente-endereco">Endereço</label>
+                <input type="text" id="orc-cliente-endereco" placeholder="Endereço completo">
+              </div>
+              <div class="field">
+                <label for="orc-cliente-assinatura">Nome para assinatura do cliente</label>
+                <input type="text" id="orc-cliente-assinatura" placeholder="Nome completo do responsável">
+              </div>
+              <div class="field">
+                <label for="orc-cliente-cargo">Cargo do responsável</label>
+                <input type="text" id="orc-cliente-cargo" placeholder="Ex: Presidente, Proprietário">
+              </div>
+            </div>
+
+            <h3>Itens do Orçamento</h3>
+            <div class="orc-itens-panel">
+              <div class="orc-itens-header">
+                <span class="col-num">#</span>
+                <span class="col-desc">Descrição</span>
+                <span class="col-unid">Unidade</span>
+                <span class="col-qtd">Qtd</span>
+                <span class="col-valor">Val. Unit.</span>
+                <span class="col-total">Total</span>
+                <span class="col-acao"></span>
+              </div>
+              <div id="orc-itens" class="itens-list"></div>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm btn-add-item" id="btn-add-item">+ Adicionar item</button>
+
+            <div class="form-grid form-grid-extra">
+              <div class="field">
+                <label for="orc-prazo">Prazo de execução</label>
+                <input type="text" id="orc-prazo" value="A combinar após aprovação do orçamento">
+              </div>
+              <div class="field">
+                <label for="orc-garantia">Garantia</label>
+                <select id="orc-garantia"></select>
+              </div>
+              <div class="field">
+                <label for="orc-desconto">Desconto (R$)</label>
+                <input type="number" id="orc-desconto" value="0" min="0" step="0.01">
+              </div>
+              <div class="field full">
+                <label for="orc-condicoes">Condições comerciais</label>
+                <textarea id="orc-condicoes" rows="3" placeholder="Ex: Orçamento já contempla todos os materiais necessários. Valores sujeitos a renegociação conforme acordo entre as partes."></textarea>
+              </div>
+              <div class="field full">
+                <label for="orc-obs">Observações adicionais</label>
+                <textarea id="orc-obs" rows="3" placeholder="Informações extras, restrições de acesso, horários, etc."></textarea>
+              </div>
+              <div class="field full">
+                <span class="field-label" id="orc-pagamento-label">Formas de pagamento</span>
+                <div id="orc-pagamento" class="pagamento-options" role="group" aria-labelledby="orc-pagamento-label"></div>
+              </div>
+            </div>
+          </form>
+
+          <div class="actions">
+            <button type="button" class="btn btn-success" id="btn-pdf-orc">Exportar PDF</button>
+            <button type="button" class="btn btn-secondary" id="btn-png-orc">Exportar PNG</button>
+          </div>
+        </div>
+    </section>
+  </main>
+  </div>
+
+</body></html>

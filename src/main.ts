@@ -1,5 +1,6 @@
 import { mountAuthGate } from './auth-gate';
 import { bindFuncionarioField, loadConfig } from './config';
+import { initCampoHistorico } from './campo-historico';
 import { getLogoUrl, getLogoDataUri } from './logo';
 import { initOrcamento } from './orcamento';
 import './styles/style.css';
@@ -14,6 +15,7 @@ async function initApp(): Promise<void> {
   bindFuncionarioField();
 
   initOrcamento();
+  await initCampoHistorico();
 }
 
 mountAuthGate(() => { void initApp(); });

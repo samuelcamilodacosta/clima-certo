@@ -457,6 +457,45 @@ form {
 
 .hidden { display: none !important; }
 
+.autocomplete-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-list {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  bottom: auto;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.autocomplete-list.autocomplete-list-fixed {
+  position: fixed;
+  right: auto;
+  z-index: 9999;
+}
+
+.autocomplete-option {
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.autocomplete-option:hover,
+.autocomplete-option.is-active {
+  background: var(--blue-light);
+}
+
 .form-side {
   background: var(--white);
   padding: 1rem;
@@ -574,7 +613,6 @@ form {
 .orc-item-row .field-qtd::before { content: 'Qtd'; }
 .orc-item-row .field-valor::before { content: 'Val. Unit.'; }
 
-.orc-item-row .field-desc select,
 .orc-item-row .field-desc input,
 .orc-item-row .field-unid input,
 .orc-item-row .field-qtd input,
@@ -591,19 +629,7 @@ form {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.orc-item-row .field-desc select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.6rem center;
-  padding-right: 1.75rem;
-  cursor: pointer;
-  white-space: normal;
-  text-overflow: ellipsis;
-}
-
 .orc-item-row .field-desc input:focus,
-.orc-item-row .field-desc select:focus,
 .orc-item-row .field-unid input:focus,
 .orc-item-row .field-qtd input:focus,
 .orc-item-row .field-valor input:focus {
@@ -612,9 +638,6 @@ form {
   box-shadow: 0 0 0 3px rgba(0, 71, 149, 0.1);
 }
 
-.orc-item-row .item-desc-custom {
-  margin-top: 0.4rem;
-}
 
 .orc-item-row .field-qtd input,
 .orc-item-row .field-valor input {
@@ -668,6 +691,12 @@ form {
   cursor: pointer;
   transition: all 0.15s;
   flex-shrink: 0;
+}
+
+.orc-item-row .field-desc,
+.orc-item-row .field-unid,
+.orc-item-row .autocomplete-wrap {
+  overflow: visible;
 }
 
 .orc-item-row .btn-remove:hover {
@@ -753,7 +782,6 @@ form {
     content: none;
   }
 
-  .orc-item-row .field-desc select,
   .orc-item-row .field-desc input,
   .orc-item-row .field-unid input,
   .orc-item-row .field-qtd input,
@@ -911,7 +939,6 @@ form {
   .orc-item-row .field-valor::before { content: 'Val. Unit.'; }
   .orc-item-row .item-total::before { content: 'Total'; }
 
-  .orc-item-row .field-desc select,
   .orc-item-row .field-desc input,
   .orc-item-row .field-unid input,
   .orc-item-row .field-qtd input,

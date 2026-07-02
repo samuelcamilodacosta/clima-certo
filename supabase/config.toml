@@ -1,0 +1,8 @@
+[functions.verify-password]
+verify_jwt = true
+
+[functions.get-historico]
+verify_jwt = true
+
+[functions.save-historico]
+verify_jwt = true
